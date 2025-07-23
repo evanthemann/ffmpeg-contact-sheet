@@ -22,8 +22,13 @@ sleep 1
 
 VIDEO_DIR=$(dirname "$VIDEO_PATH")
 VIDEO_BASENAME=$(basename "$VIDEO_PATH")
-OUTPUT_FILENAME="${VIDEO_BASENAME%.*}.jpg"
+OUTPUT_FILENAME="${VIDEO_BASENAME%.*}_tile.jpg"
 OUTPUT_PATH="${VIDEO_DIR}/${OUTPUT_FILENAME}"
+
+if [ -f "$OUTPUT_PATH" ]; then
+  echo "⚠️  Skipping: $OUTPUT_FILENAME already exists."
+  continue
+fi
 
 echo -e "\n📁 The output image will be saved to:"
 echo "$VIDEO_DIR"
